@@ -1,0 +1,14 @@
+#main-footer {
+    text-align: center;
+}
+
+#main-footer ul {
+    margin: 0;
+    padding: 0;
+}
+
+#main-footer li {
+    display: inline;
+    display: inline-block;
+    list-style: none;
+}

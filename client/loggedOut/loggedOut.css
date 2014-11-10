@@ -1,0 +1,10 @@
+.logged-out-notice {
+    color: white;
+    color: rgba(255, 255, 255, 0.84);
+}
+
+.logged-out-notice h1 {
+    margin-top: 0;
+    color: white;
+    color: rgba(255, 255, 255, 0.84);
+}

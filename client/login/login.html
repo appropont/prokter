@@ -1,0 +1,37 @@
+<template name="login">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 well page-header">
+        <h1>Login</h1>
+        {{#autoForm schema=loginFormSchema id="loginForm" class="form-horizontal" validation="submit"}}
+            {{#if validationError}}
+                <div class="alert alert-danger">{{validationError}}</div>
+            {{/if}}
+            <div class="form-group">
+                <label for="login-page-email" class="col-lg-2 control-label">Email</label>
+                <div class="col-lg-10">
+                    {{!--<input
+                        class="form-control"
+                        id="login-page-email"
+                        placeholder="Email"
+                        type="email"
+                        value="{{loginEmail}}">--}}
+                    {{> afFieldInput name='email' type='email' id='login-page-email'}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="login-page-password" class="col-lg-2 control-label">Password</label>
+                <div class="col-lg-10">
+                    {{!--<input
+                        class="form-control"
+                        id="login-page-password"
+                        placeholder="Password"
+                        type="password"
+                        value="{{loginPassword}}">--}}
+                    {{> afFieldInput name='password' type='password' id='login-page-password'}}
+                </div>
+            </div>
+            <div class="form-group" id="submit-wrapper">
+                <button id="login-submit" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        {{/autoForm}}
+    </div>
+</template>

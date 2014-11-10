@@ -1,0 +1,46 @@
+<template name="settings">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 well page-header">
+        <h1>Settings</h1>
+        {{#autoForm collection="UserMeta" doc=userMeta id="editSettingsForm" class="form-horizontal" type="update"}}
+            {{#if validationError}}
+                <div class="alert alert-danger">{{validationError}}</div>
+            {{/if}}
+            <div class="form-group password-salt-form-group">
+                <label for="edit-settings-salt" class="col-lg-2 control-label">
+                    Salt
+                </label>
+                <div class="col-lg-10">
+                    <div class="input-group">
+                        {{> afFieldInput name='salt' type='text' id='edit-settings-salt' value=userMeta.salt}}
+                        <span class="input-group-btn">
+                            <a id="generate-user-salt" href="#" class="btn btn-primary">Generate</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <legend>Timeouts (in seconds)</legend>
+                <div class="form-group col-sm-6">
+                    <label for="edit-settings-login-timeout" class="col-lg-8 control-label">Inactivity</label>
+                    <div class="col-lg-4">
+                        {{> afFieldInput name='loginTimeout' type='number' id='edit-settings-login-timeout' value=userMeta.loginTimeout}}
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="edit-settings-show-pass-timeout" class="col-lg-8 control-label">Show Password</label>
+                    <div class="col-lg-4">
+                        {{> afFieldInput name='showPassTimeout' type='number' id='edit-settings-show-pass-timeout' value=userMeta.showPassTimeout}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-xs-12" id="submit-wrapper">
+                <div>
+                    <i class="icon-material-error icon-material-red"></i>
+                    <em>Saving changes to your settings requires you to log back in.</em>
+                </div>
+                <button id="settings-submit" type="submit" class="btn btn-success">Save</button>
+                <a href="{{pathFor 'passwords'}}" class="btn btn-danger">Cancel</a>
+            </div>
+        {{/autoForm}}
+    </div>
+</template>

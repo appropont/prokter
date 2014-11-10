@@ -1,0 +1,33 @@
+#main-header {
+    padding:0;
+}
+
+#main-header h1 {
+    margin-bottom: 0;
+}
+#main-header h2 {
+    margin-top: 0;
+}
+
+#main-header p {
+    text-align: center;
+}
+
+.navbar-brand img {
+    display: inline;
+    vertical-align: sub;
+}
+
+#jumbotron-image {
+    text-align: center;
+    padding: 0;
+}
+
+#jumbotron-image img {
+    max-width: 100%
+}
+
+#jumbotron-call-to-action {
+    text-align: center;
+    padding: 0;
+}

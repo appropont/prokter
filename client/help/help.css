@@ -1,0 +1,13 @@
+.contribute-option {
+    text-align: center;
+}
+
+.contribute-option i.btn.btn-fab {
+    font-size: 42px;
+    padding: 7px;
+}
+
+.contribute-option p {
+    margin-top: 1rem;
+    text-align: left;
+}
