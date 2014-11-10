@@ -23,13 +23,13 @@
                 <div class="form-group col-sm-6">
                     <label for="edit-settings-login-timeout" class="col-lg-8 control-label">Inactivity</label>
                     <div class="col-lg-4">
-                        {{> afFieldInput name='loginTimeout' type='number' id='edit-settings-login-timeout' value=userMeta.loginTimeout}}
+                        {{> afFieldInput name='loginTimeout' type='number' id='edit-settings-login-timeout' value=userMeta.loginTimeout min=10}}
                     </div>
                 </div>
                 <div class="form-group col-sm-6">
                     <label for="edit-settings-show-pass-timeout" class="col-lg-8 control-label">Show Password</label>
                     <div class="col-lg-4">
-                        {{> afFieldInput name='showPassTimeout' type='number' id='edit-settings-show-pass-timeout' value=userMeta.showPassTimeout}}
+                        {{> afFieldInput name='showPassTimeout' type='number' id='edit-settings-show-pass-timeout' value=userMeta.showPassTimeout min=1}}
                     </div>
                 </div>
             </div>

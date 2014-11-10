@@ -26,13 +26,15 @@ UserMetaSchema = new SimpleSchema({
     loginTimeout : {
         type: Number,
         label: 'Inactivity Timeout Length (s)',
-        defaultValue: 60
+        defaultValue: 60,
+        min: 10
     },
 
     showPassTimeout : {
         type: Number,
         label: 'Timeout Length of Shown Passwords (s)',
-        defaultValue: 10
+        defaultValue: 10,
+        min: 1
     }
 
 });
