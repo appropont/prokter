@@ -8,11 +8,13 @@
                 <h1>Prokter</h1>
                 <h2> is an open source password hasher and manager.</h2>
             </div>
-            <div id="jumbotron-call-to-action" class="col-xs-12">
-                <a class="btn btn-success" href="{{pathFor 'register'}}">Sign-up</a>
-                 or
-                <a class="btn btn-primary" href="{{pathFor 'login'}}">Log-in</a>
-            </div>
+            {{#unless currentUser}}
+                <div id="jumbotron-call-to-action" class="col-xs-12">
+                    <a class="btn btn-success" href="{{pathFor 'register'}}">Sign-up</a>
+                     or
+                    <a class="btn btn-primary" href="{{pathFor 'login'}}">Log-in</a>
+                </div>
+            {{/unless}}
 
         </div>
     </div>
