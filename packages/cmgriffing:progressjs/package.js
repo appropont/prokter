@@ -7,8 +7,8 @@ Package.onUse(function(api, where) {
   api.versionsFrom('METEOR@0.9.0');
   //api.use('jquery');
   //api.export('progressJs', 'client');
-  api.addFiles('./lib/progress.min.js', 'client');
-  api.addFiles('./lib/progressjs.min.css', 'client');
+  api.addFiles('./lib/progress.js', 'client');
+  api.addFiles('./lib/progressjs.css', 'client');
 });
 
 Package.onTest(function(api) {

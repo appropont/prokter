@@ -1,5 +1,6 @@
 Template.passwords.rendered = function() {
     wrapInputWithMaterial('.password-display');
+    this.autorun(clearProgressBars);
 };
 
 var obscuredPassword = function(length){
@@ -8,6 +9,21 @@ var obscuredPassword = function(length){
         obscuredPass += '*';
     }
     return obscuredPass;
+};
+
+var progressBars = [];
+var progressBarTimeouts = [];
+
+var clearProgressBars = function() {
+    if(Session.get('clearAllProgressBars') === true) {
+        _.each(progressBarTimeouts, function(element, index, list) {
+            clearTimeout(element);
+        });
+        _.each(progressBars, function(element, index, list) {
+            console.log('element', element);
+            element.kill();
+        });
+    }
 };
 
 Template.passwords.helpers({
@@ -79,9 +95,13 @@ Template.passwords.events({
 
         var progressObject = progressJs(realTarget).start().autoIncrease(increaseRate, intervalLength);
 
-        Meteor.setTimeout(function() {
+        progressBars.push(progressObject);
+
+        var timeout = Meteor.setTimeout(function() {
             Session.set('show' + password._id, false);
             progressObject.end();
         }, showPassDuration * 1000);
+
+        progressBarTimeouts.push(timeout);
     }
 });
