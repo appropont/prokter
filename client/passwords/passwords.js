@@ -13,9 +13,13 @@ var obscuredPassword = function(length){
 
 var progressBars = [];
 var progressBarTimeouts = [];
+var showPasswordFlags = [];
 
 var clearProgressBars = function() {
     if(Session.get('clearAllProgressBars') === true) {
+        _.each(showPasswordFlags, function(element, index, list) {
+            Session.set(element, false);
+        });
         _.each(progressBarTimeouts, function(element, index, list) {
             clearTimeout(element);
         });
@@ -68,6 +72,7 @@ Template.passwords.events({
         //console.log(this);
         var password = this;
         Session.set('show' + password._id, true);
+        showPasswordFlags.push('show' + password._id);
 
         var showPassDuration = Router.current().data().userMeta.showPassTimeout;
 
