@@ -1,12 +1,7 @@
-
 #Prokter
+A password hasher and manager built with Meteor.
 
-Attributions and Credits
 
-* [Twitter Bootstrap](https://github.com/twbs/bootstrap)
-* [Bootstrap Material](https://github.com/FezVrasta/bootstrap-material-design)
-* [Forge](https://github.com/digitalbazaar/forge)
-* [Progress.js](https://github.com/usablica/progress.js)
 
 Copyright (C) 2014  Appropont
 
