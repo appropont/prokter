@@ -1,6 +1,27 @@
 Template.passwordsListItem.rendered = function() {
     wrapInputWithMaterial('.password-display');
-    this.autorun(clearProgressBars);
+};
+
+Template.passwordsListItem.created = function() {
+    this.timer = new ReactiveVar(false);
+    this.showingPassword = new ReactiveVar(false);
+    this.progressBar = new ReactiveVar(false);
+};
+
+Template.passwordsListItem.destroyed = function() {
+    
+    var timer = this.timer.get();
+    if(timer !== false) {
+        Meteor.clearTimeout(timer);
+        this.timer.set(false);
+    }
+    
+    var progressBar = this.progressBar.get();
+    if(progressBar !== false) {
+        progressBar.kill();
+        this.progressBar.set(false);
+    }
+    
 };
 
 var obscuredPassword = function(length){
@@ -11,33 +32,16 @@ var obscuredPassword = function(length){
     return obscuredPass;
 };
 
-var progressBars = [];
-var progressBarTimeouts = [];
-var showPasswordFlags = [];
-
-var clearProgressBars = function() {
-    if(Session.get('clearAllProgressBars') === true) {
-        _.each(showPasswordFlags, function(element, index, list) {
-            Session.set(element, false);
-        });
-        _.each(progressBarTimeouts, function(element, index, list) {
-            clearTimeout(element);
-        });
-        _.each(progressBars, function(element, index, list) {
-            console.log('element', element);
-            element.kill();
-        });
-    }
-};
-
 Template.passwordsListItem.helpers({
 
     passwordDisplay : function(password) {
         if(!password){
             return '';
         }
-
-        if(Session.get('show' + password._id) === true) {
+        
+        var showingPassword = Template.instance().showingPassword.get();
+        
+        if(showingPassword === true) {
             var userHash = Router.current().data().userMeta.hash;
             var passSalt = this.salt;
             var passHash = makeHash(userHash, passSalt);
@@ -51,19 +55,18 @@ Template.passwordsListItem.helpers({
 });
 
 Template.passwordsListItem.events({
-    'click .viewPassword' : function(e) {
+    'click .viewPassword' : function(e, template) {
         e.preventDefault();
-        console.log(e.target);
 
         var realTarget = e.target;
+        
+        //check if browser is sending event from child of .viewPassword
         if(!$(e.target).hasClass('viewPassword')) {
             realTarget = e.target.parentNode;
         }
 
-        //console.log(this);
         var password = this;
-        Session.set('show' + password._id, true);
-        showPasswordFlags.push('show' + password._id);
+        template.showingPassword.set(true);
 
         var showPassDuration = Router.current().data().userMeta.showPassTimeout;
 
@@ -72,33 +75,27 @@ Template.passwordsListItem.events({
         var increaseRate = parseFloat(100 / (showPassDuration*hertz));
         var intervalLength = 1000 / hertz;
 
-        console.log(increaseRate);
-
         var increaseRateRemainder = increaseRate - Math.floor(increaseRate);
         var multiplier = 1;
 
-        if(increaseRateRemainder != 0) {
+        if(increaseRateRemainder !== 0) {
             multiplier = 1 / increaseRateRemainder;
             increaseRate = increaseRate * multiplier;
             intervalLength = intervalLength * multiplier;
         }
 
-        console.log(
-            'multipler: ', multiplier,
-            ' increaseRate: ', increaseRate,
-            ' intervalLength: ', intervalLength
-        );
-
         var progressObject = progressJs(realTarget).start().autoIncrease(increaseRate, intervalLength);
 
-        progressBars.push(progressObject);
+        template.progressBar.set(progressObject);
 
         var timeout = Meteor.setTimeout(function() {
-            Session.set('show' + password._id, false);
+            template.showingPassword.set(false);
+            template.timer.set(false);
             progressObject.end();
+            template.progressBar.set(false);
         }, showPassDuration * 1000);
 
-        progressBarTimeouts.push(timeout);
+        template.timer.set(timeout);
     }
 });
 
