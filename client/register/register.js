@@ -77,7 +77,7 @@ AutoForm.hooks({
 
             Accounts.createUser(options, function(error) {
                 if(error) {
-                    //console.log('createUser error: ', error);
+                    console.log('createUser error: ', error);
                     //todo: better error notice (based on error object)
                     Session.set('registerError', 'Create User Error');
                     self.done();
@@ -94,6 +94,7 @@ AutoForm.hooks({
                     });
 
                     Session.set('registerError', false);
+                    attachActivityListener(60);//using default since user hasn't had a chance to change it
                     Router.go('passwords');
                     self.done();
                 }
