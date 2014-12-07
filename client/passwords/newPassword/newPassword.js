@@ -45,7 +45,7 @@ Template.newPassword.events({
     'click #generate-salt' : function(e) {
         e.preventDefault();
 
-        var newSalt = generateSalt();
+        var newSalt = Security.generateSalt();
         $('#new-password-salt').val(newSalt);
     },
     'click .icon-option' : function(e) {

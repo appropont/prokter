@@ -83,9 +83,9 @@ AutoForm.hooks({
                     self.done();
                 } else {
 
-                    var newSalt = generateSalt();
+                    var newSalt = Security.generateSalt();
 
-                    var newHash = makeHash(options.password, newSalt);
+                    var newHash = Security.makeHash(options.password, newSalt);
 
                     UserMeta.insert({
                         userId: Meteor.userId(),

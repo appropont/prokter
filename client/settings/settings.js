@@ -6,7 +6,7 @@ Template.settings.events({
     'click #generate-user-salt' : function(e) {
         e.preventDefault();
 
-        var newSalt = generateSalt();
+        var newSalt = Security.generateSalt();
         $('#edit-settings-salt').val(newSalt);
     }
 });

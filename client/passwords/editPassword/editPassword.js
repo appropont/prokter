@@ -34,7 +34,7 @@ Template.editPassword.helpers({
 Template.editPassword.events({
     'click #generate-salt' : function(e) {
         e.preventDefault();
-        var newSalt = generateSalt();
+        var newSalt = Security.generateSalt();
         $('#edit-password-salt').val(newSalt);
     },
     'click .icon-option' : function(e) {

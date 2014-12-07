@@ -44,7 +44,7 @@ Template.passwordsListItem.helpers({
         if(showingPassword === true) {
             var userHash = Router.current().data().userMeta.hash;
             var passSalt = this.salt;
-            var passHash = makeHash(userHash, passSalt);
+            var passHash = Security.makeHash(userHash, passSalt);
             return passHash.substr(0, password.length);
         } else {
             return obscuredPassword(password.length);

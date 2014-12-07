@@ -57,7 +57,7 @@ AutoForm.hooks({
                     attachActivityListener(sessionDuration);
 
                     //refresh hash in case of salt change
-                    var newHash = makeHash(insertDoc.password, userMeta.salt);
+                    var newHash = Security.makeHash(insertDoc.password, userMeta.salt);
                     UserMeta.update({_id: userMeta._id},
                         {
                             $set: {
